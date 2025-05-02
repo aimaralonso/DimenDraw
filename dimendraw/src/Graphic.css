@@ -1,0 +1,202 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  .cad-container {
+    display: flex;
+    width: 100vh;
+    height: 100vh;
+  }
+  .cad-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  
+  .canvas-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  
+  #myCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+  .sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-right: 3px solid #444;
+  }
+  
+  
+  .sidebar h5 {
+    margin: 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  
+  .sidebar a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 20px;
+    background: #b60000;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  
+  .sidebar a:hover {
+    transform: scale(1.05);
+  }
+  
+  
+  .canvas-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4f4f4;
+  }
+  
+  
+  canvas {
+    width: 80%;
+    height: 80%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  
+  /* Estilos del Modal */
+  .modal {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  
+  
+    /* Fondo semi-transparente */
+  }
+  
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  
+  .extrudedView {
+    width: 100%;
+    height: 400px;
+    background-color: #fff;
+  }
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #494949;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  
+  input:checked + .slider {
+    background-color: #8f0000;
+  }
+  
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #000000;
+  }
+  
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  
+  
+  
