@@ -387,6 +387,7 @@ const Workk: React.FC = () => {
 
 
       modifyTool.onMouseDown = function (event: paper.ToolEvent) {
+        deselectAllPaths();
         segment = path = null;
 
 
@@ -397,6 +398,7 @@ const Workk: React.FC = () => {
         }
         //Que no se pueda seleccionar el grid
         if (hitResult.item.name === "X" || hitResult.item.name === "Y") {
+
           return;
         }
         let marcadorArc: paper.Item[] | null =
@@ -526,9 +528,9 @@ const Workk: React.FC = () => {
           .forEach(function (textItem) {
             textItem.remove();
           });
-        if (selectionGroup) {
+       /*  if (selectionGroup) {
           selectionGroup.position = selectionGroup.position.add(event.delta);
-        }
+        } */
         if (event.modifiers.option && segment && path) {
           if (lastMousePosition) {
             let center = path.position; // Centro del path para rotar
@@ -620,7 +622,7 @@ const Workk: React.FC = () => {
 
 
 
-      let selectionGroup: paper.Group | null;
+      //let selectionGroup: paper.Group | null;
       let height2d = 5;
       drawTool.onMouseUp = function (event: paper.ToolEvent) {
         if (path) {
@@ -639,29 +641,20 @@ const Workk: React.FC = () => {
 
       // Eventos para la herramienta de borrado
       eraseTool.onMouseDown = function (event: paper.ToolEvent) {
-        if (selectionGroup) {
-          while (selectionGroup.children.length > 0) {
-            // Move the first child of the group to be a sibling of the group
-            selectionGroup.children[0].insertAbove(selectionGroup);
-          }
-          selectionGroup.remove();
-          selectionGroup = null;
-        }
-
-
 
         if (!event.item) {
           return;
         }
-
-
-        let grupo = findGroupContainingChild(event.item);
-        if (grupo !== null) {
-          grupo.remove();
-          event.item.remove();
-        }
-
-
+        /* 
+        
+                let grupo = findGroupContainingChild(event.item);
+                if (grupo !== null) {
+                  grupo.remove();
+                  console.log("EEE")
+                  event.item.remove();
+                }
+        
+         */
         // Eliminar el objeto 2D si existe en los arrays
         pathsArray = pathsArray.filter((item) => item !== event.item);
 
@@ -691,20 +684,23 @@ const Workk: React.FC = () => {
       eraseTool.onMouseMove = function (event: paper.ToolEvent) {
         paper.project.activeLayer.selected = false;
         if (event.item) {
-          event.item.selected = true;
+
           if (event.item.name === "X" || event.item.name === "Y") {
             event.item.selected = false;
           }
+          else {
+            event.item.selected = true;
+          }
         }
       };
-      function findGroupContainingChild(child: paper.Item) {
+  /*     function findGroupContainingChild(child: paper.Item) {
         // Obtener todos los grupos en el proyecto
         const groups = paper.project.getItems({ class: paper.Group });
 
 
         // Buscar un grupo que contenga el elemento como hijo
         return groups.find((group) => group.children.includes(child)) || null;
-      }
+      } */
 
 
       function eliminarPathsTemporales() {
@@ -1025,6 +1021,17 @@ const Workk: React.FC = () => {
     }
 
 
+    // 1) Deseleccionar **únicamente** los paths que estén seleccionados
+    function deselectAllPaths() {
+      const selectedPaths = paper.project.getItems({
+        class: paper.Path,
+        selected: true
+      }) as paper.Path[];
+
+      selectedPaths.forEach(path => {
+        path.selected = false;
+      });
+    }
 
 
 
